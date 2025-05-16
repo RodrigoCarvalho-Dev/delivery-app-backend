@@ -4,7 +4,9 @@
     "outDir": "dist",
     "strict" : true,
     "esModuleInterop" : true,   
-    "target": "ES2020",
-    "module": "CommonJS"                      
-  }
+    "target": "ESNext",
+    "module": "NodeNext",                   
+  },
+    "include": ["src/*"],
+    "exclude": ["node_modules", "dist", "test"]
 }

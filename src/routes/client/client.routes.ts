@@ -1,15 +1,15 @@
-import { Request, Response, Router } from "express";
-import { CreateClientController } from "../../modules/client/useCases/createClient/createClientController";
-import { AuthenticateClientController } from "../../modules/account/authenticateClient/authenticateClientController";
+import { Router } from 'express';
+import { CreateClientController } from '../../modules/client/useCases/createClient/createClientController';
+import { AuthenticateClientController } from '../../modules/account/authenticateClient/authenticateClientController';
 
 const clientRouter = Router();
 
-const createClientController = new CreateClientController
+const createClientController = new CreateClientController();
 
-clientRouter.post( "/client", createClientController.handle )
+clientRouter.post('/client', createClientController.handle);
 
-const authenticateClientController = new AuthenticateClientController(); 
+const authenticateClientController = new AuthenticateClientController();
 
-clientRouter.post("/client/login", authenticateClientController.handle )
+clientRouter.post('/client/login', authenticateClientController.handle);
 
 export { clientRouter };

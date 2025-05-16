@@ -1,15 +1,15 @@
-import { config } from "dotenv";
-import express from "express";
-import { router } from "./routes/router";
+import { config } from 'dotenv';
+import express from 'express';
+import { router } from './routes/router';
+import { clientMiddleware } from './middleware/client.middleware';
 
 config();
 
 const app = express();
-app.use(express.json())
+app.use(express.json());
 
 app.use(router);
 
-app.listen( process.env.PORT ?? 3000, () => {
-    console.log("rodando na porta http://localhost:3000")
-});
+app.use(clientMiddleware);
 
+app.listen(process.env.PORT ?? 3000);
