@@ -17,7 +17,7 @@ export class CreateClientUseCase {
     // validar se o usuário existe -> depois
 
     const existingClient = await prisma.clients.findUnique({
-      where: { username },
+      where: { username: username },
     });
 
     if (existingClient) {

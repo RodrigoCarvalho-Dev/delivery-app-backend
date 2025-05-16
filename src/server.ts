@@ -12,4 +12,6 @@ app.use(router);
 
 app.use(clientMiddleware);
 
-app.listen(process.env.PORT ?? 3000);
+app.listen(process.env.PORT ?? 3000, () => {
+  console.log('hosting = http://localhost:3000');
+});

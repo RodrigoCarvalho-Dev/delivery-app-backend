@@ -6,7 +6,7 @@ const clientRouter = Router();
 
 const createClientController = new CreateClientController();
 
-clientRouter.post('/client', createClientController.handle);
+clientRouter.post('/client/register', createClientController.handle);
 
 const authenticateClientController = new AuthenticateClientController();
 

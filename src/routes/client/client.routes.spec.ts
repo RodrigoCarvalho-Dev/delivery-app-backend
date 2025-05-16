@@ -12,13 +12,13 @@ describe('Client Routes Test', () => {
     app.use(clientRouter);
   });
 
-  it('POST /client should return the client created as a reponse', async () => {
+  it('POST /client/register should return the client created as a reponse', async () => {
     const mockClient = {
       username: 'jonh doe',
       password: '123456',
     };
 
-    const res = await request(app).post('/client').send(mockClient);
+    const res = await request(app).post('/client/register').send(mockClient);
 
     expect(res.statusCode).toEqual(success.CREATED_STATUS_201.status);
     expect(res.body).toStrictEqual({
