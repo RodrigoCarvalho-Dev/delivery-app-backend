@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { CreateClientController } from '../../modules/client/useCases/createClient/createClientController';
-import { AuthenticateClientController } from '../../modules/account/authenticateClient/authenticateClientController';
+import { AuthenticateClientController } from '../../modules/auth/authenticateClient/authenticateClientController';
 
 const clientRouter = Router();
 

@@ -1,33 +1,29 @@
+import { compare } from 'bcrypt';
 import { error } from '../../../constants/error.constant';
 import { prisma } from '../../../database/prismaClient';
-import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 
-interface IAuthenticateClient {
+interface IAuthenticateDeliveryManUseCase {
   username: string;
   password: string;
 }
 
-interface ResponseAuthenticateClient {
+interface ResponseIAuthenticateDeliveryManUseCase {
   token: string;
-  client: {
-    username: string;
-    password: string;
-    id: string;
-  };
 }
 
-export class AutheticateClientUseCase {
-  async execute({ username, password }: IAuthenticateClient): Promise<ResponseAuthenticateClient> {
-    // receber username, password
-
-    const client = await prisma.clients.findFirst({
+export class AuthenticateDeliveryManUseCase {
+  async execute({
+    username,
+    password,
+  }: IAuthenticateDeliveryManUseCase): Promise<ResponseIAuthenticateDeliveryManUseCase> {
+    const deliveryMan = await prisma.deliveryman.findUnique({
       where: {
         username: username,
       },
     });
 
-    if (!client) {
+    if (!deliveryMan) {
       throw new Error(
         `${error.NOT_FOUND_ERROR_404.message} | status : ${error.NOT_FOUND_ERROR_404.status}`
       );
@@ -35,7 +31,7 @@ export class AutheticateClientUseCase {
 
     // Verificar se username está cadastrado
 
-    const passwordMatch = await compare(password, client.password);
+    const passwordMatch = await compare(password, deliveryMan.password);
 
     if (!passwordMatch) {
       throw new Error(
@@ -53,11 +49,11 @@ export class AutheticateClientUseCase {
       },
       String(process.env.SECRET_KEY),
       {
-        subject: client.id,
+        subject: deliveryMan.id,
         expiresIn: '1d',
       }
     );
 
-    return { token, client };
+    return { token };
   }
 }

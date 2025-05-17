@@ -23,6 +23,11 @@ const error = {
     messege: 'happen a error on the server with the HTTP status code 500',
     status: 500,
   },
+
+  UNAUTHORIZED_ERROR_401: {
+    message: 'happen to authorize the client, use the token',
+    status: 401,
+  },
 };
 
 export { error };

@@ -31,4 +31,20 @@ describe('Client Routes Test', () => {
       },
     });
   });
+
+  it('POST /deliveryMan/login should return the token of the deliveryMan as a reponse', async () => {
+    const mockClient = {
+      username: 'jonh doe',
+      password: '123456',
+    };
+
+    const res = await request(app).post('/deliveryMan/login').send(mockClient);
+
+    expect(res.statusCode).toEqual(success.CREATED_STATUS_201.status);
+    expect(res.body).toStrictEqual({
+      message: success.AUTHENTICATION_CREATED_STATUS_201.message,
+      status: success.AUTHENTICATION_CREATED_STATUS_201.status,
+      token: expect.any(String),
+    });
+  });
 });

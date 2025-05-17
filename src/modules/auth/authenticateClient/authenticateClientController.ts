@@ -8,7 +8,7 @@ export class AuthenticateClientController {
 
     const authenticateClientUseCase = new AutheticateClientUseCase();
 
-    const { token } = await authenticateClientUseCase.execute({
+    const { token, client } = await authenticateClientUseCase.execute({
       username: username,
       password: password,
     });
@@ -16,6 +16,7 @@ export class AuthenticateClientController {
     res.status(201).json({
       message: success.AUTHENTICATION_CREATED_STATUS_201.message,
       status: success.AUTHENTICATION_CREATED_STATUS_201.status,
+      client: client,
       token: token,
     });
   }
